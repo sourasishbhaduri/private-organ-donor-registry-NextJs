@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from 'react';
 import { UserCheck, Shield, Lock, FileCheck, Cpu, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { DonorFormData } from '../types';

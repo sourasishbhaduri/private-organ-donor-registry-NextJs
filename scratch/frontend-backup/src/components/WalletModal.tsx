@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState, useEffect } from 'react';
 import { X, Wallet, ShieldCheck, Download, Key, AlertTriangle, Cpu, CheckCircle2 } from 'lucide-react';
 import { detectMidnightWallets, connectLaceWallet, connectSeedWallet, DetectedWallet } from '../utils/midnightWallet';

@@ -1,5 +1,3 @@
-"use client";
-
 // Utilities for Midnight Lace Wallet & extension detection
 
 export interface DetectedWallet {
@@ -87,8 +85,8 @@ export async function connectLaceWallet(walletId?: string): Promise<{
   const walletAPI = await targetWallet.provider.enable();
 
   let address = '';
-  let tNightBalance = BigInt("10000000000"); // Default initial balance representation
-  let dustBalance = BigInt("500000000");
+  let tNightBalance = 10000000000n; // Default initial balance representation
+  let dustBalance = 500000000n;
 
   // Try extracting state or addresses from the connected wallet API
   try {
@@ -160,7 +158,7 @@ export async function connectSeedWallet(seed: string): Promise<{
 
   return {
     address: `mn_addr_devnet1q${hex}`,
-    tNightBalance: BigInt("5000000000"),
-    dustBalance: BigInt("250000000"),
+    tNightBalance: 5000000000n,
+    dustBalance: 250000000n,
   };
 }

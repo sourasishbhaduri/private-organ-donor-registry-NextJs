@@ -1,5 +1,3 @@
-"use client";
-
 import React from 'react';
 import { ShieldCheck, HeartPulse, Wallet, Network } from 'lucide-react';
 import { WalletState, NetworkId } from '../types';

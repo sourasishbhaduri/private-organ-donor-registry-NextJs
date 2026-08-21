@@ -1,5 +1,3 @@
-"use client";
-
 import React from 'react';
 import { Database, RefreshCw, Activity, Heart, Users } from 'lucide-react';
 import { PublicLedgerData } from '../types';

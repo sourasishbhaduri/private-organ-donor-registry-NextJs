@@ -4,10 +4,10 @@ export interface WalletState {
   connected: boolean;
   address: string | null;
   network: NetworkId;
-  tNightBalance: bigint | null;
-  dustBalance: bigint | null;
-  syncing?: boolean;
-  walletName?: string | null;
+  tNightBalance: bigint;
+  dustBalance: bigint;
+  syncing: boolean;
+  walletName?: string;
   providerType?: 'lace' | 'seed' | 'other';
   error?: string | null;
 }

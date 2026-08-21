@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from 'react';
 import { ShieldCheck, KeyRound, Cpu, CheckCircle2, XCircle } from 'lucide-react';
 import { VerificationResult } from '../types';

@@ -1,0 +1,44 @@
+name: Midnight DApp CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22.x]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Install root dependencies
+      run: npm install
+
+    - name: Compile Compact contract
+      run: npm run compile
+
+    - name: Build CLI and Type-Check Root
+      run: npm run build
+
+    - name: Run Contract Tests
+      run: npm run test
+
+    - name: Install Frontend Dependencies
+      working-directory: ./frontend
+      run: npm install --legacy-peer-deps
+
+    - name: Build Next.js Frontend
+      working-directory: ./frontend
+      run: npm run build

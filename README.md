@@ -1,119 +1,93 @@
 # Private Organ Donor Registry
 
-A privacy-preserving zero-knowledge organ donor registry built on the Midnight Network using Compact smart contracts.
+**Private Organ Donation. Verifiable Consent. Protected Identity.**
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen.svg)](https://private-organ-donor-registry.vercel.app/)
-[![Demo Video](https://img.shields.io/badge/Demo-Video-red.svg)](https://youtu.be/cKyQAnHrgIc)
-[![CI/CD Pipeline](https://github.com/sourasishbhaduri/private-organ-donor-registry/actions/workflows/ci.yml/badge.svg)](https://github.com/sourasishbhaduri/private-organ-donor-registry/actions/workflows/ci.yml)
-[![Midnight Preprod](https://img.shields.io/badge/Midnight-Preprod-blue.svg)](https://explorer.preprod.midnight.network/)
-[![Compact Language](https://img.shields.io/badge/Compact-Language-orange.svg)](https://docs.midnight.network/develop/tutorial/building/compact)
-[![Node.js Version](https://img.shields.io/badge/Node.js-22-green.svg)](https://nodejs.org/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+A full-stack, privacy-preserving dApp built on the Midnight Network for the **Rise In Midnight Builder Challenge Level 3**. 
+This application allows individuals to cryptographically register their organ donation consent and prove their eligibility (e.g. age, medical clearance) using zero-knowledge proofs, without ever exposing their underlying private data.
 
-## 🚀 Live Demo, Video & Repository
-- **🌐 Live Web Application**: https://private-organ-donor-registry.vercel.app/
-- **📺 YouTube Demo Video**: https://youtu.be/cKyQAnHrgIc
-- **📦 GitHub Repository**: https://github.com/sourasishbhaduri/private-organ-donor-registry
-- **📄 Project Proposal**: [PROPOSAL.md](./PROPOSAL.md)
-- **⚙️ CI/CD Workflow**: `.github/workflows/ci.yml`
+## Problem
+Traditional organ donor registries require individuals to share highly sensitive medical and identifying information with a centralized database. This creates privacy risks, data silos, and potential unauthorized access. Furthermore, hospitals and verifiers need to query these centralized databases, creating further privacy leaks.
 
-## 📋 Challenge Requirements & Passing Checklist
-- [x] **Fully Functional Privacy dApp**: Meaningful use of Midnight's Zero-Knowledge privacy model to register donors anonymously.
-- [x] **Live Demo Deployment**: https://private-organ-donor-registry.vercel.app/
-- [x] **Demo Video (Lace Wallet + ZK Circuit Call)**: https://youtu.be/cKyQAnHrgIc
-- [x] **Product Proposal**: Detailed 4-section architecture document in [PROPOSAL.md](./PROPOSAL.md)
-- [x] **Passing Test Suite**: 11/11 Vitest unit tests passing (`npm test`)
-- [x] **CI/CD Pipeline Running**: GitHub Actions workflow running automated build & tests (`.github/workflows/ci.yml`)
-- [x] **Public GitHub Repository**: https://github.com/sourasishbhaduri/private-organ-donor-registry
-- [x] **Deployed Smart Contract**: `0x1e3a57110a038d73d0d8e23777ced0e087e75d3f9185add9c967d26daf28cab3`
-- [x] **On-Chain Explorer Verification**: Verify Contract on Midnight Preprod Explorer
-- [x] **Browser Wallet Integration**: Directly connects to user's Midnight Lace Wallet (`window.midnight.mnLace` / `window.midnight.lace`)
-- [x] **Lace Wallet Connect / Disconnect Lifecycle**: Full session management with event prompts and error handling
-- [x] **16+ Meaningful Commits**: Verified structured commit history in main branch
+## Solution
+Using the **Midnight Network**, this application implements a Zero-Knowledge circuit that allows donors to generate a proof of eligibility and consent locally. The network verifies the proof without ever seeing the private data.
 
-## 🛡️ Midnight Privacy Model: What an Observer Learns vs Cannot Learn
+## Features
+- **Donor Registration:** Generate a ZK proof of age (>=18) and medical clearance.
+- **Privacy-Preserving Registry:** Only cryptographic commitments and aggregate blood supply metrics are stored publicly.
+- **Verification Portal:** Hospitals can verify a donor's eligibility and consent locally without accessing a central database.
+- **Next.js Full-Stack App:** Premium, responsive UI built with Next.js (App Router) and Tailwind CSS.
+- **Lace Wallet Integration:** Seamless connection with Midnight Lace Wallet.
 
-**❌ What an Observer CANNOT Learn (Kept Strictly Private):**
-- **Raw Donor Passphrase / Identity**: The secret donor passphrase is executed purely in local ZK witnesses and never transmitted to the network or stored in public state.
-- **Donor Identity / Wallet Linking**: The Zero-Knowledge proof proves the donor's eligibility and registers their intent without revealing personal identifiable information (PII) or unshielded credentials on-chain.
-- **Precise Donor Age**: Age verification (> 18) happens inside local ZK circuit constraints. The exact age is never revealed.
-- **Individual Organ Pledges**: Which specific user pledged which specific organs remains hidden from observers.
+## Privacy Model
 
-**✅ What an Observer CAN Learn (Disclosed On-Chain Public State):**
-- **Verified Total Donors**: The aggregate counter tracking the total number of registered donors.
-- **Anonymized Blood Availability Tally**: The system tallies public counts of available blood types (e.g., Type O-, Type A+) to help medical institutions.
-- **Cryptographic Commitment Hash**: The disclosed persistent hash commitment representing a mathematically proven registration event.
+### Public State (Ledger)
+- Anonymous Cryptographic Commitment
+- Total Number of Registered Donors
+- Aggregated Blood Supply Counts (Anonymized)
+- Binary Consent Status Result (during verification)
 
-## 🛠️ Contract & Live Deployment Details
-| Environment | Location / Address | Verification / Explorer Link |
-| --- | --- | --- |
-| **Live Web App** | https://private-organ-donor-registry.vercel.app/ | [Open Live App](https://private-organ-donor-registry.vercel.app/) |
-| **Demo Video** | https://youtu.be/cKyQAnHrgIc | [Watch Video Demo](https://youtu.be/cKyQAnHrgIc) |
-| **Preprod Smart Contract** | `0x1e3a57110a038d73d0d8e23777ced0e087e75d3f9185add9c967d26daf28cab3` | [Verify Contract on Midnight Preprod Explorer](https://explorer.preprod.midnight.network/?search=0x1e3a57110a038d73d0d8e23777ced0e087e75d3f9185add9c967d26daf28cab3) |
-| **CI/CD Workflow** | `.github/workflows/ci.yml` | [View GitHub Actions Run](https://github.com/sourasishbhaduri/private-organ-donor-registry/actions) |
+### Private Witness (Never Leaves Local Device)
+- Donor Identity & Name
+- Exact Age / Date of Birth
+- Exact Blood Type (Unless explicitly disclosed for supply stats)
+- Medical Clearance Document Hash
 
-## 🔑 Browser Wallet Connector (`window.midnight.mnLace`)
-```typescript
-// Connect directly to user's browser Midnight Lace Wallet extension
-public async connectWallet(): Promise<{ connected: boolean; walletAddress: string; walletName: string }> {
-  const provider = this.getBrowserWalletProvider();
-  if (!provider) {
-    throw new Error("Midnight Lace Wallet extension not detected. Please install and enable the extension.");
-  }
-  const connectedApi = await provider.connect('preprod');
-  const address = await connectedApi.getUnshieldedAddress();
-  return { connected: true, walletAddress: address.unshieldedAddress, walletName: provider.name };
-}
+## Architecture & Tech Stack
+- **Smart Contracts:** Compact (Midnight's ZK language)
+- **Frontend:** Next.js 14+ (App Router), React, Tailwind CSS
+- **Wallet Integration:** Lace Wallet / Midnight SDK
+- **Network:** Midnight Preprod & Local Devnet
+
+## Folder Structure
+- `contracts/`: Compact smart contracts and generated artifacts
+- `frontend/`: Next.js application
+- `src/`: TypeScript CLI and wallet utilities
+- `test/`: Integration tests
+
+## Installation & Setup
+
+1. **Install Dependencies**
+   ```bash
+   npm install
+   cd frontend && npm install
+   ```
+
+2. **Compile Contract**
+   ```bash
+   npm run compile
+   ```
+
+3. **Run Local Frontend**
+   ```bash
+   cd frontend
+   npm run dev
+   ```
+
+## Contract Deployment (Preprod)
+
+The contract is designed to be deployed to the Midnight Preprod network.
+
+**Blocker Note / Deployment Status:**
+Currently deployed contract address on Preprod (if successful):
+`[Awaiting CLI Deployment confirmation]`
+
+## Environment Variables
+In the `frontend` folder, create a `.env.local` file:
+```
+NEXT_PUBLIC_NETWORK=preprod
+NEXT_PUBLIC_CONTRACT_ADDRESS=<DEPLOYED_CONTRACT_ADDRESS>
 ```
 
-## 🚀 Quickstart & Local Installation
+## Testing & CI/CD
+- GitHub Actions CI is configured to run `npm install`, compile the contract, and build the Next.js frontend on every push to `main`.
+- You can run the tests locally using: `npm run test`
 
-Clone the repository:
-```bash
-git clone https://github.com/sourasishbhaduri/private-organ-donor-registry.git
-cd private-organ-donor-registry
-```
-
-Set Node version and install dependencies:
-```bash
-nvm use 22
-npm install
-```
-
-Start the Midnight Proof Server container:
-```bash
-docker run -d -p 6300:6300 midnightntwrk/proof-server:8.1.0
-```
-
-Compile the Compact contract:
-```bash
-npm run compile
-```
-
-Start Development Server:
-```bash
-npm run dev
-```
-
-## 🧪 Automated Test Suite
-
-Run the unit test suite:
-```bash
-npm test
-```
-
-**Expected Output:**
-```
- ✓ test/organ-donor-registry.test.ts (11 tests) 
-
- Test Files  1 passed (1)
-      Tests  11 passed (11)
-```
-
-## 📸 Platform Screenshots
-
-**Visitor Verification Portal**
-![Landing Page](./assets/landing-page.png)
-
-**Public Ledger Tally**
-![Public Ledger Tally](./assets/ledger-tally.png)
+## Rise In Level 3 Submission Checklist
+- [x] Real organ registry contract with Public/Private state separation
+- [x] disclose() used deliberately
+- [x] Generated artifacts exist
+- [x] Lace Wallet integration
+- [x] Next.js Frontend with /dashboard, /register, /verify, /records, /history, /privacy, /about routes
+- [x] CI passes
+- [x] Production build passes
+- [x] README completed
