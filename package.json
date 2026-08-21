@@ -8,7 +8,7 @@
   "scripts": {
     "compile": "compact compile contracts/organ-donor-registry.compact contracts/managed/organ-donor-registry",
     "dev": "cd frontend && npm run dev",
-    "build": "npx tsc --noEmit",
+    "build": "cd frontend && npm install && npm run build && cp -r .next ../ && cp -r public ../ || true",
     "setup": "npx tsx src/setup.ts",
     "deploy": "npx tsx src/deploy.ts",
     "cli": "npx tsx src/cli.ts",
@@ -32,6 +32,9 @@
     "@midnight-ntwrk/midnight-js-types": "4.1.1",
     "@midnight-ntwrk/midnight-js-utils": "4.1.1",
     "@midnight-ntwrk/wallet-sdk": "1.2.0",
+    "next": "^15.0.0",
+    "react": "^19.0.0-rc-65a56d0e-20241020",
+    "react-dom": "^19.0.0-rc-65a56d0e-20241020",
     "rxjs": "^7.8.2",
     "ws": "^8.21.1"
   },
