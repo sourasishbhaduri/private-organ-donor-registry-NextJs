@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Output as a static HTML/JS site to bypass Vercel monorepo constraints
+  output: 'export',
   // Disable ESLint during builds (CI runs lint separately)
   eslint: {
     ignoreDuringBuilds: true,
