@@ -30,11 +30,11 @@ const ORGANS = [
 ];
 
 export const DonorRegistrationForm: React.FC<DonorRegistrationFormProps> = ({ onRegister, isSubmitting }) => {
-  const [secretId, setSecretId] = useState('');
+  const [secretPassphrase, setSecretPassphrase] = useState('');
   const [age, setAge] = useState<number>(24);
-  const [bloodType, setBloodType] = useState<number>(1);
+  const [bloodType, setBloodType] = useState<number>(4); // Default A+
   const [pledgedOrgans, setPledgedOrgans] = useState<number[]>([1, 2]); // Default Kidney + Liver
-  const [clearanceSeed, setClearanceSeed] = useState('HOSP-METRO-CLEARANCE-99482');
+  const [medicalClearanceSeed, setMedicalClearanceSeed] = useState('HOSP-METRO-CLEARANCE-99482');
   
   const [resultStatus, setResultStatus] = useState<{ success?: boolean; txHash?: string; commitment?: string; error?: string } | null>(null);
 
@@ -53,14 +53,14 @@ export const DonorRegistrationForm: React.FC<DonorRegistrationFormProps> = ({ on
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setResultStatus(null);
-    if (!secretId.trim()) return;
+    if (!secretPassphrase.trim()) return;
 
     const res = await onRegister({
-      secretId,
+      secretPassphrase,
       age,
       bloodType,
-      organPledgeMask,
-      clearanceSeed,
+      organPledgeBitmask: organPledgeMask,
+      medicalClearanceSeed,
     });
     setResultStatus(res);
   };
@@ -95,8 +95,8 @@ export const DonorRegistrationForm: React.FC<DonorRegistrationFormProps> = ({ on
             type="password"
             className="form-input"
             placeholder="e.g. secret-donor-passphrase-88392"
-            value={secretId}
-            onChange={(e) => setSecretId(e.target.value)}
+            value={secretPassphrase}
+            onChange={(e) => setSecretPassphrase(e.target.value)}
             required
           />
           <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
@@ -183,8 +183,8 @@ export const DonorRegistrationForm: React.FC<DonorRegistrationFormProps> = ({ on
           <input
             type="text"
             className="form-input font-mono"
-            value={clearanceSeed}
-            onChange={(e) => setClearanceSeed(e.target.value)}
+            value={medicalClearanceSeed}
+            onChange={(e) => setMedicalClearanceSeed(e.target.value)}
             required
           />
           <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
@@ -194,7 +194,7 @@ export const DonorRegistrationForm: React.FC<DonorRegistrationFormProps> = ({ on
 
         {/* Submit Action */}
         <div style={{ marginTop: '8px' }}>
-          <button type="submit" className="btn-saas-primary" disabled={isSubmitting || !secretId} style={{ width: '100%', justifyContent: 'center', padding: '14px' }}>
+          <button type="submit" className="btn-saas-primary" disabled={isSubmitting || !secretPassphrase} style={{ width: '100%', justifyContent: 'center', padding: '14px' }}>
             {isSubmitting ? (
               <>
                 <Cpu size={18} className="animate-spin" /> Generating ZK Proof & Submitting to Midnight...

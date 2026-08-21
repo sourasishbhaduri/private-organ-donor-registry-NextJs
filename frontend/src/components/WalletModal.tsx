@@ -42,6 +42,7 @@ export const WalletModal: React.FC<WalletModalProps> = ({ isOpen, onClose, onWal
         dustBalance: res.dustBalance,
         providerType: 'lace',
         error: null,
+        api: res.api, // Raw DApp connector API for contract calls
       });
       onClose();
     } catch (err: any) {

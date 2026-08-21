@@ -7,9 +7,11 @@ import { Navbar } from '../../components/Navbar';
 import { WalletModal } from '../../components/WalletModal';
 import { DonorRegistrationForm } from '../../components/DonorRegistrationForm';
 import { WalletState } from '../../types';
+import { registerDonorOnChain } from '../../utils/contractInteraction';
 
 export default function RegisterPage() {
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [wallet, setWallet] = useState<WalletState>({
     connected: false,
     address: null,
@@ -18,6 +20,7 @@ export default function RegisterPage() {
     dustBalance: null,
     network: 'preprod',
     error: null,
+    api: null,
   });
 
   return (
@@ -25,7 +28,7 @@ export default function RegisterPage() {
       <Navbar
         wallet={wallet}
         onConnect={() => setIsWalletModalOpen(true)}
-        onDisconnect={() => setWallet({ ...wallet, connected: false, address: null, tNightBalance: null, dustBalance: null })}
+        onDisconnect={() => setWallet({ ...wallet, connected: false, address: null, tNightBalance: null, dustBalance: null, api: null })}
         onNetworkChange={(network) => setWallet({ ...wallet, network })}
       />
       <WalletModal
@@ -42,17 +45,28 @@ export default function RegisterPage() {
         <div className="saas-card" style={{ padding: '0', overflow: 'hidden' }}>
           {wallet.connected ? (
             <DonorRegistrationForm
-              isSubmitting={false}
+              isSubmitting={isSubmitting}
               onRegister={async (data) => {
-                console.log('Registration data:', data);
-                return { success: true, commitment: 'mock-commitment', txHash: 'mock-tx' };
+                setIsSubmitting(true);
+                try {
+                  const result = await registerDonorOnChain(
+                    data,
+                    wallet.api,
+                    wallet.address || 'unknown'
+                  );
+                  return result;
+                } catch (err: any) {
+                  return { success: false, error: err?.message || 'Unknown error during registration' };
+                } finally {
+                  setIsSubmitting(false);
+                }
               }}
             />
           ) : (
             <div style={{ padding: '60px 40px', textAlign: 'center' }}>
               <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '16px' }}>Connect Wallet to Register</h2>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '24px' }}>
-                You need to connect your Midnight Lace Wallet or a Devnet Seed to register as a donor.
+                You need to connect your 1AM Wallet or Midnight Lace Wallet to register as a donor.
               </p>
               <button onClick={() => setIsWalletModalOpen(true)} className="btn-saas-primary">
                 Connect Wallet
