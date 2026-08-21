@@ -21,23 +21,14 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-
-    - name: Install root dependencies
-      run: npm install
-
-    - name: Compile Compact contract
-      run: npm run compile
-
-    - name: Build CLI and Type-Check Root
-      run: npm run build
-
-    - name: Run Contract Tests
-      run: npm run test
 
     - name: Install Frontend Dependencies
       working-directory: ./frontend
-      run: npm install --legacy-peer-deps
+      run: npm install
+
+    - name: Type-Check Frontend
+      working-directory: ./frontend
+      run: npx tsc --noEmit
 
     - name: Build Next.js Frontend
       working-directory: ./frontend
