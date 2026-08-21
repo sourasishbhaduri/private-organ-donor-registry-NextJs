@@ -76,10 +76,10 @@ The Registry leverages Midnight's dual-state architecture where private witness 
 
 | Parameter | Value | Explorer Link |
 |-----------|-------|---------------|
-| **Active Contract (Latest)** | *TBD (Deployment via Midnight CLI pending)* | [🔍 View on Preprod Explorer](https://explorer.preprod.midnight.network) |
-| **Initial Contract** | *TBD* | [🔍 View on Preprod Explorer](https://explorer.preprod.midnight.network) |
-| **Latest Tx Hash** | *TBD* | [🔍 View Transaction](https://explorer.preprod.midnight.network) |
-| **Deployer Wallet** | `mn_addr_preprod1qlzf6h6zjhyms2p3y4vu5p278zqkqqaqk9nualrndghgxywseres5hth5u` | [Preprod Faucet](https://midnight-tmnight-preprod.nethermind.dev/) |
+| **Active Contract (Latest)** | *Deploy via 1AM wallet DApp connector — see guide below* | [🔍 View on Preprod Explorer](https://explorer.preprod.midnight.network) |
+| **Deployer Wallet** | `mn_addr_preprod14627k5eflyrpnty67k2nsv96kkshn7tqt90mrxktkem4pqfrre2q86ujlv` | [Preprod Faucet](https://midnight-tmnight-preprod.nethermind.dev/) |
+
+> **Note:** The contract is deployed directly via the 1AM Wallet browser extension DApp connector. To get the deployment tx hash, connect your 1AM wallet to the DApp at `http://localhost:3000`, navigate to `/register`, and initiate a registration transaction. The contract address and transaction hash will appear in the Midnight Preprod Explorer linked above.
 
 ## 🔄 CI/CD Pipeline & Automated Quality Gates
 
