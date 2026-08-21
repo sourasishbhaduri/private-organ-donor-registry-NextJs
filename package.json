@@ -42,7 +42,7 @@
     "typescript": "^5.6.3"
   },
   "engines": {
-    "node": ">=22.0.0"
+    "node": "22.x"
   },
   "keywords": ["midnight", "blockchain", "zero-knowledge", "privacy", "organ-donor-registry"]
 }
