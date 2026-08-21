@@ -37,7 +37,4 @@ jobs:
         run: npx tsc --noEmit
 
       - name: Build Frontend Application
-        run: |
-          cd frontend
-          npm ci
-          npm run build
+        run: npm run build
