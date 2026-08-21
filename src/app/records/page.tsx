@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Activity, Heart, Shield } from 'lucide-react';
 import { Navbar } from '../../components/Navbar';
 import { WalletModal } from '../../components/WalletModal';
 import { PublicLedgerState } from '../../components/PublicLedgerState';
