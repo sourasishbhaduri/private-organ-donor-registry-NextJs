@@ -45,7 +45,7 @@ export const WalletModal: React.FC<WalletModalProps> = ({ isOpen, onClose, onWal
       });
       onClose();
     } catch (err: any) {
-      console.error('Lace connection error:', err);
+      // Intentionally suppressing console.error to prevent Next.js 15 Dev Overlay from intercepting expected wallet connection errors
       setErrorMessage(err.message || 'Failed to connect to Lace Wallet.');
     } finally {
       setIsConnecting(false);
@@ -157,7 +157,7 @@ export const WalletModal: React.FC<WalletModalProps> = ({ isOpen, onClose, onWal
               gap: '6px',
             }}
           >
-            <ShieldCheck size={16} /> Lace / Extension Wallet
+            <ShieldCheck size={16} /> Extension Wallet (Lace / 1AM)
           </button>
           <button
             type="button"
@@ -249,10 +249,10 @@ export const WalletModal: React.FC<WalletModalProps> = ({ isOpen, onClose, onWal
                   <AlertTriangle size={24} color="#eab308" />
                 </div>
                 <h3 style={{ fontSize: '1.05rem', fontWeight: 600, marginBottom: '6px' }}>
-                  Lace Extension Not Detected
+                  Wallet Extension Not Detected
                 </h3>
                 <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '20px' }}>
-                  We couldn't detect the Midnight Lace Wallet extension in your browser window. Install Lace Wallet to experience full ZK privacy features.
+                  We couldn't detect a Midnight Wallet extension (like Lace or 1AM) in your browser window. Install a supported wallet to experience full ZK privacy features.
                 </p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   <a
@@ -262,7 +262,7 @@ export const WalletModal: React.FC<WalletModalProps> = ({ isOpen, onClose, onWal
                     className="btn-saas-primary"
                     style={{ justifyContent: 'center', textDecoration: 'none', padding: '12px' }}
                   >
-                    <Download size={18} /> Install Midnight Lace Wallet
+                    <Download size={18} /> Install a Midnight Wallet
                   </a>
                   <button
                     type="button"
