@@ -2,32 +2,29 @@
 
 Enterprise Zero-Knowledge Organ Donor Registration & Eligibility Verification built natively on the Midnight Network using Compact smart contracts, client-side ZK-SNARK proving, dual-state ledger privacy, and Next.js 15.
 
-### 🔗 Quick Links
-- **Live Deployment:** [https://private-organ-donor-registry-next-j.vercel.app/](https://private-organ-donor-registry-next-j.vercel.app/)
-- **Live Video Demo:** [YouTube Video](https://www.youtube.com/watch?v=ce5IJDyWQX0)
-- **GitHub Repository:** [private-organ-donor-registry-NextJs](https://github.com/sourasishbhaduri/private-organ-donor-registry-NextJs)
+<p align="center">
+  <a href="https://private-organ-donor-registry-next-j.vercel.app/"><img src="https://img.shields.io/badge/Live-Demo-blue?style=for-the-badge&logo=vercel" alt="Live Demo" /></a>
+  <a href="https://www.youtube.com/watch?v=ce5IJDyWQX0"><img src="https://img.shields.io/badge/Demo-Video-red?style=for-the-badge&logo=youtube" alt="Demo Video" /></a>
+  <a href="https://explorer.preprod.midnight.network/?search=0x1e3a57110a038d73d0d8e23777ced0e087e75d3f9185add9c967d26daf28cab3"><img src="https://img.shields.io/badge/Midnight-Preprod_Contract-black?style=for-the-badge" alt="Midnight Preprod Contract" /></a>
+  <a href="https://github.com/sourasishbhaduri/private-organ-donor-registry-NextJs/actions"><img src="https://img.shields.io/badge/CI/CD-passing-success?style=for-the-badge&logo=githubactions" alt="CI/CD" /></a>
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License" />
+</p>
 
 ## 📸 Application Screenshots
 
-### Landing page
-![Landing page](./assets/landing.png)
-Hero section showcasing mathematical privacy, connected Midnight wallet (`mn_addr...`), live Preprod network badge, and interactive zero-knowledge gateway.
-
-### Ledger Tally
-![Ledger Tally](./assets/ledger-tally.png)
-Real-time registry telemetry, sub-second ZK prover latency, live block height ticker, and on-chain commitment stream for aggregate blood supply metrics.
-
-### Public ledger
-![Public ledger](./assets/public_ledger.png)
-Private witness execution, client-side medical clearance evaluation, and interactive WASM prover activity terminal.
+| Screen | Description |
+|--------|-------------|
+| **Landing page** | **Overview & Landing Page**: Hero section showcasing mathematical privacy, connected Midnight wallet (`mn_addr...`), live Preprod network badge, and interactive zero-knowledge gateway.<br><br>![Landing page](./assets/landing.png) |
+| **Ledger Tally** | **Public Ledger Dashboard**: Real-time registry telemetry, sub-second ZK prover latency, live block height ticker, and on-chain commitment stream for aggregate blood supply metrics.<br><br>![Ledger Tally](./assets/ledger-tally.png) |
+| **Public ledger** | **Zero-Knowledge Donor Registration**: Private witness execution, client-side medical clearance evaluation, and interactive WASM prover activity terminal.<br><br>![Public ledger](./assets/public_ledger.png) |
 
 ## 🧠 Executive Summary & Problem Statement
 
 ### The Problem
 Traditional organ donor registries require individuals to share highly sensitive medical and identifying information with a centralized database. This creates critical privacy flaws:
-- **Raw Medical & PII Exposure:** Donors hand over their exact date of birth, identity, and medical conditions to centralized gatekeepers.
-- **On-Chain Surveillance:** In standard blockchain registries, signing a transaction permanently links a public wallet address to sensitive medical decisions on an immutable public ledger.
-- **Data Breach Vulnerabilities:** Centralized healthcare databases represent lucrative honeypots for credential and identity harvesting.
+- **Raw Medical & PII Exposure**: Donors hand over their exact date of birth, identity, and medical conditions to centralized gatekeepers.
+- **On-Chain Surveillance**: In standard blockchain registries, signing a transaction permanently links a public wallet address to sensitive medical decisions on an immutable public ledger.
+- **Data Breach Vulnerabilities**: Centralized healthcare databases represent lucrative honeypots for credential and identity harvesting.
 
 ### The Solution
 The Private Organ Donor Registry enables individuals to mathematically prove their eligibility and donation consent in Zero-Knowledge.
@@ -41,34 +38,34 @@ The Registry leverages Midnight's dual-state architecture where private witness 
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│ DONOR'S LOCAL CLIENT                                                        │
+│                          DONOR'S LOCAL CLIENT                               │
 │                                                                             │
-│      [ Secret Passphrase ] + [ Exact Age ] + [ Medical Clearance Seed ]     │
-│                                     │                                       │
-│          ▼ (Private witness execution strictly inside browser/WASM)         │
-│ ┌──────────────────────────────────────────────┐                            │
-│ │ Midnight Compact Circuit                     │                            │
-│ │                                              │ ← Midnight Proof Server    │
-│ │ - secretPassphrase() witness execution       │   (localhost:6300)         │
-│ │ - verifyEligibility() constraint evaluation  │                            │
-│ │ - donorBloodType() statistical masking       │                            │
-│ └──────────────────────┬───────────────────────┘                            │
-│                        │                                                    │
-│                        ▼ (ZK-SNARK Proof only)                              │
+│  [ Secret Passphrase ] + [ Exact Age ] + [ Medical Clearance Seed ]         │
+│          │                                                                  │
+│          ▼  (Private witness execution strictly inside browser/WASM)        │
+│  ┌──────────────────────────────────────────────┐                           │
+│  │  Midnight Compact Circuit                    │                           │
+│  │  - secretPassphrase() witness execution      │   ← Midnight Proof Server │
+│  │  - verifyEligibility() constraint evaluation │     (localhost:6300)      │
+│  │  - donorBloodType() statistical masking      │                           │
+│  └──────────────────────┬───────────────────────┘                           │
+│                         │                                                   │
+│                         ▼  (ZK-SNARK Proof only)                            │
 └─────────────────────────┼───────────────────────────────────────────────────┘
+                          │
                           ▼ (Network Boundary: ZERO PII Transmitted)
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│ MIDNIGHT PREPROD LEDGER                                                     │
+│                         MIDNIGHT PREPROD LEDGER                             │
 │                                                                             │
-│ PUBLIC ON-CHAIN STATE:                                                      │
-│ ✅ totalDonors — Aggregate counter incremented (+1)                         │
-│ ✅ lastCommitment — One-way cryptographic fingerprint (SHA-256)             │
-│ ✅ bloodSupplyCounts — Anonymized aggregate metrics                         │
+│  PUBLIC ON-CHAIN STATE:                                                     │
+│  ✅ totalDonors         — Aggregate counter incremented (+1)                │
+│  ✅ lastCommitment      — One-way cryptographic fingerprint (SHA-256)       │
+│  ✅ bloodSupplyCounts   — Anonymized aggregate metrics                      │
 │                                                                             │
-│ PROTECTED PRIVATE STATE (Never exposed or stored on-chain):                 │
-│ ❌ exactAge / DOB — Plaintext integer                                       │
-│ ❌ medicalClearance — Client-side medical token                             │
-│ ❌ donorWalletId — Personal wallet address                                  │
+│  PROTECTED PRIVATE STATE (Never exposed or stored on-chain):                │
+│  ❌ exactAge / DOB      — Plaintext integer                                 │
+│  ❌ medicalClearance    — Client-side medical token                         │
+│  ❌ donorWalletId       — Personal wallet address                           │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -87,10 +84,8 @@ The Registry leverages Midnight's dual-state architecture where private witness 
 
 | Parameter | Value | Explorer Link |
 |-----------|-------|---------------|
-| **Active Contract (Latest)** | *Deploy via 1AM wallet DApp connector — see guide below* | [🔍 View on Preprod Explorer](https://explorer.preprod.midnight.network) |
-| **Deployer Wallet** | `mn_addr_preprod14627k5eflyrpnty67k2nsv96kkshn7tqt90mrxktkem4pqfrre2q86ujlv` | [Preprod Faucet](https://midnight-tmnight-preprod.nethermind.dev/) |
-
-> **Note:** The contract is deployed directly via the 1AM Wallet browser extension DApp connector. To get the deployment tx hash, connect your 1AM wallet to the DApp at `http://localhost:3000`, navigate to `/register`, and initiate a registration transaction. The contract address and transaction hash will appear in the Midnight Preprod Explorer linked above.
+| **Active Contract (Latest)** | `0x1e3a57110a038d73d0d8e23777ced0e087e75d3f9185add9c967d26daf28cab3` | [🔍 View on Preprod Explorer](https://explorer.preprod.midnight.network/?search=0x1e3a57110a038d73d0d8e23777ced0e087e75d3f9185add9c967d26daf28cab3) |
+| **Deployer Wallet** | `mn_addr_preprod1qlzf6h6zjhyms2p3y4vu5p278zqkqqaqk9nualrndghgxywseres5hth5u` | [Preprod Faucet](https://midnight-tmnight-preprod.nethermind.dev/) |
 
 ## 🔄 CI/CD Pipeline & Automated Quality Gates
 
@@ -98,7 +93,7 @@ Every commit and pull request is automatically validated through a comprehensive
 
 ```text
 ┌────────────────────────────────────────────────────────────────────────┐
-│ GITHUB ACTIONS CI/CD PIPELINE                                          │
+│                     GITHUB ACTIONS CI/CD PIPELINE                      │
 ├───────────────────┬───────────────────┬────────────────────────────────┤
 │ Job 1: ESLint     │ npm run lint      │ Code formatting & syntax audit │
 │ Job 2: TypeCheck  │ npm run typecheck │ TypeScript strict compilation  │
@@ -113,7 +108,7 @@ Every commit and pull request is automatically validated through a comprehensive
 ### 1. System Requirements & Prerequisites
 - **Node.js**: v20.x or v22.x (LTS recommended)
 - **Docker**: For running the local Midnight Proof Server
-- **Browser Extension**: [1AM Wallet](https://1am.xyz/) or [Midnight Lace](https://midnight.network/get-lace)
+- **Browser Extension**: 1AM Wallet or Midnight Lace
 
 ### 2. Installation & Setup
 ```bash
@@ -146,7 +141,7 @@ Get testnet `tDUST` / `tNIGHT` tokens from the official Nethermind Faucet:
 cd frontend
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000/)
+Open [http://localhost:3000](http://localhost:3000)
 
 ### 6. Connect Wallet (1AM Wallet & Lace)
 1. Click the "Connect Wallet" button in the top navigation bar.
@@ -159,7 +154,12 @@ npm run compile
 # Deployment via Midnight CLI workflow
 ```
 
-## ✅ Feature & Compliance Checklist (Rise In Level 3)
+### 8. Run Automated Unit Tests
+```bash
+npm test
+```
+
+## ✅ Feature & Compliance Checklist
 
 ### Smart Contracts & ZK Circuits
 - [x] Written in Midnight Compact Language (`contracts/bboard.compact`)
@@ -208,5 +208,9 @@ private-organ-donor-registry-NextJs/
 │   ├── package.json
 │   └── tailwind.config.ts     # UI Theming System
 ├── test/                      # Integration tests
+├── PROPOSAL.md                # In-depth Product & Architecture Proposal
 └── README.md                  # Primary documentation & user guide
 ```
+
+## 📄 License
+This project is open-source and distributed under the MIT License. See `LICENSE` for details.
