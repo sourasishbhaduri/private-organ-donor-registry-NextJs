@@ -2,6 +2,11 @@
 
 Enterprise Zero-Knowledge Organ Donor Registration & Eligibility Verification built natively on the Midnight Network using Compact smart contracts, client-side ZK-SNARK proving, dual-state ledger privacy, and Next.js 15.
 
+### 🔗 Quick Links
+- **Live Deployment:** [https://private-organ-donor-registry-next-j.vercel.app/](https://private-organ-donor-registry-next-j.vercel.app/)
+- **Live Video Demo:** [YouTube Video](https://www.youtube.com/watch?v=ce5IJDyWQX0)
+- **GitHub Repository:** [private-organ-donor-registry-NextJs](https://github.com/sourasishbhaduri/private-organ-donor-registry-NextJs)
+
 ## 📸 Application Screenshots
 
 ### Landing page
