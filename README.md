@@ -4,11 +4,17 @@ Enterprise Zero-Knowledge Organ Donor Registration & Eligibility Verification bu
 
 ## 📸 Application Screenshots
 
-| Screen | Description |
-|--------|-------------|
-| **Overview & Landing Page** | Hero section showcasing mathematical privacy, connected Midnight wallet (`mn_addr...`), live Preprod network badge, and interactive zero-knowledge gateway. |
-| **Public Ledger Dashboard** | Real-time registry telemetry, sub-second ZK prover latency, live block height ticker, and on-chain commitment stream for aggregate blood supply metrics. |
-| **Zero-Knowledge Donor Registration** | Private witness execution, client-side medical clearance evaluation, and interactive WASM prover activity terminal. |
+### Landing page
+![Landing page](./assets/landing.png)
+Hero section showcasing mathematical privacy, connected Midnight wallet (`mn_addr...`), live Preprod network badge, and interactive zero-knowledge gateway.
+
+### Ledger Tally
+![Ledger Tally](./assets/ledger-tally.png)
+Real-time registry telemetry, sub-second ZK prover latency, live block height ticker, and on-chain commitment stream for aggregate blood supply metrics.
+
+### Public ledger
+![Public ledger](./assets/public_ledger.png)
+Private witness execution, client-side medical clearance evaluation, and interactive WASM prover activity terminal.
 
 ## 🧠 Executive Summary & Problem Statement
 
